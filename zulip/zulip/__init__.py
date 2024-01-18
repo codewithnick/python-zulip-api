@@ -504,7 +504,8 @@ class Client:
         self.client_cert_key = client_cert_key
 
         self.session: Optional[requests.Session] = None
-
+        if(self.get_profile()["code"] == "UNAUTHORIZED"):
+            raise ZulipError("Invalid API key or email")
         self.has_connected = False
 
         server_settings = self.get_server_settings()
